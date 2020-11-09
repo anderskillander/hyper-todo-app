@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {v4 as uuidv4} from "uuid"
-import {TextField, Button} from '@material-ui/core';
 
 function TodoForm({ todos, setTodos }) {
     const [newTodo, setNewTodo] = useState("")
@@ -12,26 +11,14 @@ function TodoForm({ todos, setTodos }) {
     function submitHandler (e) {
         e.preventDefault();
         if(newTodo === "") return
-        setTodos([...todos, {id: uuidv4(), text: newTodo, completed: false}])
+        setTodos([...todos, {id: uuidv4(), text: newTodo}])
         setNewTodo("")
     }
     return (
         <div>
-        <form 
-        style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-        }}
-        onSubmit={submitHandler}>
-            <TextField 
-            label="Add new todo..."
-            value={newTodo} 
-            onChange={changeHandler}></TextField>
-            <Button 
-            variant="contained"
-            color="primary"
-            type="submit">Add</Button>
+        <form onSubmit={submitHandler}>
+            <input value={newTodo} onChange={changeHandler}/>
+            <button type="submit">Add</button>
         </form>
         </div>
     )
