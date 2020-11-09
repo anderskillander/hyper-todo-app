@@ -5,23 +5,24 @@ import CloseIcon from '@material-ui/icons/Close';
 
 
 function Todo({ todo, deleteTodo, toggleComplete }) {
-
+    
     const handleRemoveClick = (id) => () => toggleComplete(id);
 
     return (
             <ListItem style={{
                 listStyle: "none",
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
+                alignItems: 'space-evenly',
+                justifyContent: 'center',
                 }}>
                 <Checkbox
                 style={{
-                    opacity: todo.completed ? "0.3" : null,
+                    // display: todo.completed ? "none" : null,
                 }}
-                variant=""
+                color="primary"
                 checked={todo.completed}
-                onClick={handleRemoveClick(todo.id)}></Checkbox>
+                onClick={handleRemoveClick(todo.id)}>
+                </Checkbox>
             <Typography
             variant="body1"
             style={{
