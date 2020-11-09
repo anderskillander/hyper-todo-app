@@ -1,7 +1,7 @@
 import React from 'react'
 import Todo from "./Todo"
 
-function TodoList({ todos }) {
+function TodoList({ todos, deleteTodo, toggleComplete }) {
     return (
         <div>
             <ul>
@@ -9,6 +9,8 @@ function TodoList({ todos }) {
                     <Todo 
                     todo={todo}
                     key={todo.id}
+                    deleteTodo={deleteTodo}
+                    toggleComplete={toggleComplete}
                     />
                 ))}
             </ul>
