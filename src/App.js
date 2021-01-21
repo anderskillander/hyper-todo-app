@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 // import useLocalStorage from "./hooks/useLocalStorage"
 import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodoList"
+import Counter from './components/Counter/Counter';
+import Header from './components/Header/Header';
 
 function App() {
 
@@ -39,6 +41,8 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
+    <div className="todo-container">
       <h1>Todo's ⚡️</h1>
       <TodoForm todos={todos} setTodos={setTodos}/>
       <TodoList 
@@ -47,6 +51,10 @@ function App() {
       toggleComplete={toggleComplete}
       />
     </div>
+    <div className="counter-container">
+      <Counter />
+      </div>
+      </div>
   );
 }
 

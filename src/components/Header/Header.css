@@ -1,0 +1,56 @@
+.header-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  /*
+  -webkit-box-shadow: 0px 8px 10px 2px rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: 0px 8px 10px 2px rgba(0, 0, 0, 0.39);
+  box-shadow: 0px 8px 10px 2px rgba(0, 0, 0, 0.39); */
+}
+
+.header-container h1 {
+  text-transform: uppercase;
+}
+
+@-webkit-keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+  50% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
+
+#rainbow {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#d65db1),
+    color-stop(#ff6f91),
+    to(#ff9671)
+  );
+  background: linear-gradient(to right, #d65db1, #ff6f91, #ff9671);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 300%;
+  -webkit-animation: bg-animation 4s infinite;
+  animation: bg-animation 4s infinite;
+  font-size: 3rem;
+}
