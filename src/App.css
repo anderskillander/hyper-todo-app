@@ -34,12 +34,14 @@ h6 {
 @media only screen and (max-width: 600px) {
   body {
     width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     margin: 0;
   }
   .App {
     width: 100vw;
-    margin: 10vh 0 0 0;
     height: 100vh;
+    margin-top: 0;
     display: flex;
     justify-content: flex-start;
   }
