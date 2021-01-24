@@ -1,12 +1,23 @@
 import React from 'react'
-import {IconButton, Checkbox, ListItem, Typography} from '@material-ui/core/'
+import {IconButton, Checkbox, ListItem, Typography, ListItemText} from '@material-ui/core/'
 import CloseIcon from '@material-ui/icons/Close';
+import { db } from '../firebase_config';
 
 
 
-function Todo({ todo, deleteTodo, toggleComplete }) {
+function Todo({ todo, completed, id }) {
 
-    const handleRemoveClick = (id) => () => toggleComplete(id);
+    // const handleCompleteClick = (id) => () => toggleComplete(id);
+
+    function deleteTodo() {
+        db.collection("todos").doc(id).delete();
+      }
+
+      function completeTodo () {
+          db.collection("todos").doc(id).update({
+              completed: !completed,
+            })
+      }
 
     return (
             <ListItem style={{
@@ -15,28 +26,26 @@ function Todo({ todo, deleteTodo, toggleComplete }) {
                 alignItems: 'center',
                 justifyContent: 'space-evenly',
                 }}>
-                <Checkbox
+            <ListItemText
+            primary={todo}
+            style={{
+                textDecoration: completed ? "line-through" : null,
+                color: completed ? "#C8C8C8" : null,
+            }}/>
+            <Checkbox
                 style={{
                     opacity: todo.completed ? "0.3" : null,
                 }}
                 variant=""
                 checked={todo.completed}
-                onClick={handleRemoveClick(todo.id)}></Checkbox>
-            <Typography
-            variant="body1"
-            style={{
-                textDecoration: todo.completed ? "line-through" : null,
-                color: todo.completed ? "#C8C8C8" : null,
-                // marginRight: '50px'
-            }}
-            >
-                {todo.text}
-            </Typography>
+                // onClick={handleCompleteClick(todo.id)}
+                onClick={completeTodo}
+                ></Checkbox>
             <IconButton 
-            variant="contained"
-            color="secondary"
-            onClick={() => deleteTodo(todo.id)}
-            >
+                    variant="contained"
+                    color="secondary"
+                    onClick={deleteTodo}
+                    >
             <CloseIcon />
             </IconButton>
             </ListItem>

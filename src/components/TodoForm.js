@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import {v4 as uuidv4} from "uuid"
+// import {v4 as uuidv4} from "uuid"
 import {TextField, Button} from '@material-ui/core';
+import { db } from '../firebase_config';
+import firebase from "firebase";
 
 function TodoForm({ todos, setTodos }) {
     const [newTodo, setNewTodo] = useState("")
@@ -11,8 +13,12 @@ function TodoForm({ todos, setTodos }) {
     
     function submitHandler (e) {
         e.preventDefault();
-        if(newTodo === "") return
-        setTodos([...todos, {id: uuidv4(), text: newTodo, completed: false}])
+            if (newTodo === "") return
+        db.collection("todos").add({
+            completed: false,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            todo: newTodo,
+        })
         setNewTodo("")
     }
     return (
