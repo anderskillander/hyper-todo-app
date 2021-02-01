@@ -1,51 +1,38 @@
 import './App.css';
-import { useState, useEffect } from 'react'
-// import useLocalStorage from "./hooks/useLocalStorage"
-import TodoForm from "./components/TodoForm"
-import TodoList from "./components/TodoList"
+import { useState } from 'react'
+import {v4 as uuidv4} from "uuid"
 
 function App() {
 
-  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
+  const [todoList, setTodoList] = useState([])
   
-  
-  useEffect(() => {
-    const storageTodos = (JSON.parse(localStorage.getItem('savedTodos')))
-    if (storageTodos) {
-      setTodos(storageTodos)
-    }
-  }, []);
-  
-  useEffect(() => {
-    localStorage.setItem('savedTodos', JSON.stringify(todos));
-  }, [todos]);
-  
-  
-  function deleteTodo (id) {
-   setTodos(todos.filter(t => t.id !== id))
-  }
-  
-  function toggleComplete (id) {
-    setTodos(todos.map(todo => {
-      if(todo.id === id) {
-        return {
-          ...todo,
-          completed: !todo.completed
-        }
-      }
-      return todo
-    }))
+  function handleChange(e) {
+    setNewTodo(e.target.value)
   }
 
+  function submitHandler(e) {
+    e.preventDefault()
+    if (newTodo === '') return
+    setTodoList([...todoList, {task: newTodo, id: uuidv4()}])
+    setNewTodo("")
+  }
+
+  function deleteTodo(id) {
+    setTodoList(todoList.filter(todo => todo.id !== id))
+  }
+  
   return (
     <div className="App">
-      <h1>Todo's ⚡️</h1>
-      <TodoForm todos={todos} setTodos={setTodos}/>
-      <TodoList 
-      todos={todos} 
-      deleteTodo={deleteTodo} 
-      toggleComplete={toggleComplete}
-      />
+      <form onSubmit={submitHandler}>
+        <input type="text" value={newTodo} onChange={handleChange}/>
+        <button type="submit">Add</button>
+      </form>
+      <ul>
+        {todoList.map((todo) => (
+          <li key={todo.id}>{todo.task} <button onClick={() => deleteTodo(todo.id)}>DELETE</button></li>
+        ))}
+      </ul>
     </div>
   );
 }
