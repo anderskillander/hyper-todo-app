@@ -1,6 +1,5 @@
 import './App.css';
 import { useState, useEffect } from 'react'
-// import useLocalStorage from "./hooks/useLocalStorage"
 import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodoList"
 
