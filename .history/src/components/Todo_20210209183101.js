@@ -1,5 +1,5 @@
 import React from 'react'
-import {IconButton, Checkbox, ListItem, ListItemText} from '@material-ui/core/'
+import {IconButton, Checkbox, ListItem, Typography, ListItemText} from '@material-ui/core/'
 import CloseIcon from '@material-ui/icons/Close';
 import { db } from '../firebase_config';
 

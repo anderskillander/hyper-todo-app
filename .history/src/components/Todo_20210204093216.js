@@ -1,11 +1,13 @@
 import React from 'react'
-import {IconButton, Checkbox, ListItem, ListItemText} from '@material-ui/core/'
+import {IconButton, Checkbox, ListItem, Typography, ListItemText} from '@material-ui/core/'
 import CloseIcon from '@material-ui/icons/Close';
 import { db } from '../firebase_config';
 
 
 
 function Todo({ todo, completed, id }) {
+
+    // const handleCompleteClick = (id) => () => toggleComplete(id);
 
     function deleteTodo() {
         db.collection("todos").doc(id).delete();
@@ -36,6 +38,7 @@ function Todo({ todo, completed, id }) {
                 }}
                 variant=""
                 checked={todo.completed}
+                // onClick={handleCompleteClick(todo.id)}
                 onClick={completeTodo}
                 ></Checkbox>
             <IconButton 
